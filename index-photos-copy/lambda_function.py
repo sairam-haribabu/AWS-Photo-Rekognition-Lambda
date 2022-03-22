@@ -15,7 +15,7 @@ def detect_labels(photo, bucket):
         MaxLabels=10)
 
     print('Detected labels for ' + photo) 
-    print()   
+    print("update lambda stack check")   
     for label in response['Labels']:
         print ("Label: " + label['Name'])
         print ("Confidence: " + str(label['Confidence']))
