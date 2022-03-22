@@ -31,11 +31,6 @@ Resources:
           Properties:
             Path: /search
             Method: GET
-        Api2:
-          Type: Api
-          Properties:
-            Path: /search
-            Method: GET
       Layers:
         - 'arn:aws:lambda:us-east-1:301693012474:layer:RequestsPackage:1'
   indexphotos:
