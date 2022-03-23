@@ -59,6 +59,7 @@ def lambda_handler(event, context):
     print("Here index")
     print(key)
     try:
+        custom_labels=[]
         response = s3.get_object(Bucket=bucket, Key=key)
         print(response)
         print("CONTENT TYPE: " + response['ContentType'])
