@@ -15,7 +15,7 @@ def detect_labels(photo, bucket):
         MaxLabels=10)
 
     print('Detected labels for ' + photo) 
-    print("update lambda stack check")   
+    print()   
     for label in response['Labels']:
         print ("Label: " + label['Name'])
         print ("Confidence: " + str(label['Confidence']))
@@ -38,7 +38,7 @@ def detect_labels(photo, bucket):
     
 
 def put_elastic(obj):
-        ELASTIC_SEARCH_HOST='https://search-photos-3caywqob2vuokopwr7t7i43fky.us-east-1.es.amazonaws.com/photos/_doc'
+        ELASTIC_SEARCH_HOST='https://search-photo-hpaaisgyzvwcfpjhfvtx44ggp4.us-east-1.es.amazonaws.com/photos/_doc'
         ELASTIC_SEARCH_HTTP_AUTH='CCBD@2photos'
 
         header = {'Content-Type': 'application/json'}
@@ -62,9 +62,17 @@ def lambda_handler(event, context):
         response = s3.get_object(Bucket=bucket, Key=key)
         print(response)
         print("CONTENT TYPE: " + response['ContentType'])
+        if(response['Metadata']):
+            print("customlabelsfromuser" + response['Metadata']['customlabel'])
+            custom_labels = list(response['Metadata']['customlabel'].split(","))
+
         # detect labels in the image using Rekognition
         labels=detect_labels(key, bucket)
+        labels=custom_labels+labels
+        labels = list(set(labels))
+        print(labels)
         print("Labels detected!!!: " + str(len(labels)))
+        
 
         obj = {
            "objectKey": key,
