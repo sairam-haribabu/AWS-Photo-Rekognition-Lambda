@@ -32,8 +32,6 @@ def detect_labels(photo, bucket):
         # print ("Parents:")
         # for parent in label['Parents']:
         #     print ("   " + parent['Name'])
-        # print ("----------")
-        # print ()
     return [l['Name'] for l in response['Labels']]
     
 
