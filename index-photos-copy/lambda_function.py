@@ -5,7 +5,7 @@ import datetime
 import requests
 from requests.auth import HTTPBasicAuth
 
-print('Loading function')
+print('Loading function index')
 
 
 def detect_labels(photo, bucket):
